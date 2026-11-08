@@ -8,9 +8,7 @@ export default function AuthManager() {
 
     return (
         <div className="login-container">
-            <header className="top">
-                <div className="back"></div>
-            </header>
+            <div className="logo"></div>
 
             <div className="auth-choice">
                 <button
