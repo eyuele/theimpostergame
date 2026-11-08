@@ -119,7 +119,14 @@
         flex-direction: column;
     }
     .auth-choice {
+        gap: 1rem;
         button {
+            border-radius: 4px;
+        }
+        button:nth-child(1) {
+            border-radius: 4px;
+        }
+        button:nth-child(2) {
             border-radius: 4px;
         }
     }
