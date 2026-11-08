@@ -1,7 +1,19 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <!-- Open Graph / Telegram Preview -->
+        <meta charset="UTF-8" />
+
+        <!-- Favicon: Fixed MIME type and path -->
+        <link rel="icon" type="image/webp" href="/icon.webp" />
+
+        <meta
+            name="description"
+            content="A social deduction party game where players give clues, vote, and uncover the hidden imposter. Play with friends and test your instinct."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>The IMPOSTER: Guess . Discover . Win</title>
+
+        <!-- Open Graph / Telegram -->
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://imposterup.vercel.app/" />
         <meta property="og:title" content="The IMPOSTER: Guess . Discover . Win" />
@@ -9,17 +21,15 @@
             property="og:description"
             content="Can you uncover the hidden imposter? Give clever hints, analyze clues, and outsmart your friends in this thrilling social deduction game."
         />
-        <!-- Use the public folder path, starting with / -->
-        <meta property="og:image" content="/og-image.webp" />
 
-        <!-- Twitter Card (Optional but recommended) -->
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="The IMPOSTER: Guess . Discover . Win" />
-        <meta
-            name="twitter:description"
-            content="Can you uncover the hidden imposter? Give clever hints, analyze clues, and outsmart your friends in this thrilling social deduction game."
-        />
-        <meta name="twitter:image" content="/og-image.webp" />
+        <!-- OG Image: Absolute URL pointing to the public folder -->
+        <meta property="og:image" content="https://imposterup.vercel.app/meta_img.webp" />
+        <!-- Recommended additional OG tags -->
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <!-- Fixed typo: "therme" -> "theme" -->
+        <meta name="theme-color" content="#8B3DFF" />
     </head>
     <body>
         <div id="root"></div>
