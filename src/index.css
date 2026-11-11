@@ -37,14 +37,15 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --text: #9ca3af;
-        --text-h: #f3f4f6;
+        --text: #e8d8ff;
+        --text-h: rgb(134, 109, 147);
         --bg: #16171d;
         --border: #2e303a;
         --code-bg: #1f2028;
-        --accent: #c084fc;
+        --accent: #be84fc;
+        --bg-2: #0b001614;
         --accent-bg: rgba(192, 132, 252, 0.15);
-        --accent-border: rgba(192, 132, 252, 0.5);
+        --accent-border: #ae00ff;
         --social-bg: rgba(47, 48, 58, 0.5);
         --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
     }
@@ -55,6 +56,9 @@
 }
 
 #root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
