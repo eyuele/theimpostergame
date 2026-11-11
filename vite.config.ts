@@ -1,10 +1,16 @@
 import babel from "@rolldown/plugin-babel";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import geo from "vite-plugin-geo"; // 1. Import the plugin
 
-// https://vite.dev/config/
 export default defineConfig({
-    plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
+    plugins: [
+        react(),
+        babel({ presets: [reactCompilerPreset()] }),
+        geo({
+            domain: "https://theimpostorup.vercel.app", // 2. Add your actual domain here
+        }),
+    ],
     server: {
         proxy: {
             "/api": {

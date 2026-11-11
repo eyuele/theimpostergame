@@ -72,7 +72,7 @@ export default function AuthManager() {
                 {isLogin && (
                     <div className="auth">
                         <h2>Welcome Back</h2>
-                        <p>Enter your cedentials to join the investigation</p>
+                        <p>Enter your credentials to join the investigation</p>
                         <form onSubmit={handleSubmit}>
                             <input
                                 type="text"
