@@ -186,7 +186,7 @@ export default function Auth() {
                 {/* this is the auth for register */}
                 {!isLogin && (
                     <div className="auth">
-                        <h2>WELLCOME!</h2>
+                        <h2>WELCOME!</h2>
                         <p>{welcomeText}</p>
                         <form onSubmit={handleSubmit}>
                             <input
