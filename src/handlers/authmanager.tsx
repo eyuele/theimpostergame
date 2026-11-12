@@ -207,7 +207,6 @@ export default function Auth() {
                                 placeholder="Password"
                                 id="regpassword"
                             />
-                            <label htmlFor="regpasskey">Pass Key</label>
                             <input
                                 type="text"
                                 maxLength={10}
