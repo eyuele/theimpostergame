@@ -21,6 +21,6 @@ export default function RequiredLogin({ children }: { children: ReactNode }) {
     }, []);
 
     if (status === "loading") return <p>Loading...</p>;
-    if (status === "out") return <Navigate to="/AuthManager" replace />;
+    if (status === "out") return <Navigate to="/auth" replace />;
     return <AuthContext.Provider value={{ username }}>{children}</AuthContext.Provider>;
 }

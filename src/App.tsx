@@ -1,7 +1,8 @@
 import { Navigate, Route, Routes } from "react-router";
 import "./App.css";
 import RequireLogin from "./component/requirelogin";
-import AuthManager from "./handlers/authmanager";
+
+import Auth from "./handlers/authmanager";
 import Home from "./pages/home";
 import Layout from "./pages/layout";
 import NotFound from "./pages/notfound";
@@ -9,7 +10,7 @@ import NotFound from "./pages/notfound";
 function App() {
     return (
         <Routes>
-            <Route path="/authmanager" element={<AuthManager />} />
+            <Route path="/auth" element={<Auth />} />
             <Route
                 element={
                     <RequireLogin>

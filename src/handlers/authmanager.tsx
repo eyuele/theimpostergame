@@ -8,7 +8,7 @@ interface User {
     pass_key?: string;
 }
 
-export default function AuthManager() {
+export default function Auth() {
     const navigate = useNavigate();
 
     const [isLogin, setIsLogin] = useState(true);
@@ -149,7 +149,9 @@ export default function AuthManager() {
                                 id="regpasskey"
                             />
 
-                            <input type="submit" disabled={loading} value="Register" />
+                            <button type="submit" disabled={loading}>
+                                Register
+                            </button>
                         </form>
                         <p>{error === "" ? message : error}</p>
 
@@ -166,7 +168,7 @@ export default function AuthManager() {
                                 }}
                             >
                                 Login
-                            </button>{" "}
+                            </button>
                         </div>
                     </div>
                 )}
