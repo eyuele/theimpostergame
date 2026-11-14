@@ -13,7 +13,7 @@
 .logo {
     height: 30vh;
     width: 100%;
-    background: url("../assets/logo.webp");
+    background: url("/logo.webp");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -41,10 +41,11 @@
     width: 100%;
     backdrop-filter: blur(10px);
     h2 {
-        height: 9px;
+        padding: 5px;
         margin: 1px;
     }
     p {
+        padding-bottom: 5px;
         color: rgb(197, 211, 211);
         font-size: 0.8rem;
     }

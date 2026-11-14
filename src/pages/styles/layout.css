@@ -1,0 +1,158 @@
+.layout-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    letter-spacing: 0.1em;
+    font-family: "Times New Roman", Times, serif;
+
+    button {
+        font-family: "Times New Roman", Times, serif;
+        letter-spacing: 0.1em;
+    }
+    .top-bar {
+        width: 100%;
+        position: sticky;
+        z-index: 1000;
+        top: 0;
+        background: var(--bg-2);
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: center;
+        padding: 1rem;
+        border-bottom: 1px solid var(--accent-border);
+        align-items: center;
+        .bar-container {
+            width: 100%;
+            max-width: 90em;
+            display: flex;
+            align-items: center;
+
+            justify-content: space-between;
+            .player-detail {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1em;
+                p {
+                    text-transform: uppercase;
+                }
+                .pfp-img {
+                    height: 100%;
+                    width: 50px;
+                    border-radius: 100%;
+                }
+                .name-bage {
+                    width: 60px;
+                    height: 50px;
+                }
+            }
+            .hamburger-menu {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5em;
+                cursor: pointer;
+                span {
+                    width: 1.8em;
+                    height: 0.2em;
+                    background: var(--accent);
+                }
+            }
+        }
+    }
+    .navigation {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        max-width: 20em;
+        top: 3em;
+        right: 0em;
+        background: var(--bg-2);
+        padding: 1em;
+        border-left: 1px solid var(--accent-border);
+        transition: 0.25s;
+        animation: right-to-left 0.35s ease-in-out forwards;
+        z-index: 700;
+
+        ul {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+
+            padding-top: 5rem;
+            div {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                .nav-li {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 1rem;
+                    width: 100%;
+                    text-decoration: none;
+                    color: var(--text);
+                    width: 100%;
+                    text-transform: uppercase;
+
+                    transition: 0.35s;
+                }
+                .nav-li:hover + .divider-purple {
+                    background: linear-gradient(to right, transparent, rgb(0, 249, 253), transparent);
+                    animation: flowOutward 0.3s ease-in-out alternate;
+                }
+                .nav-li:hover {
+                    color: rgb(0, 249, 253);
+                }
+            }
+
+            .loggout-btn {
+                font-family: "Times New Roman", Times, serif;
+                text-transform: uppercase;
+                position: relative;
+                font-size: 18px;
+                width: 100%;
+                overflow: hidden;
+                padding: 1rem;
+                background: transparent;
+                border: none;
+                color: var(--accent-border);
+                cursor: pointer;
+                transition: 0.35s;
+            }
+            .loggout-btn:hover {
+                color: rgb(253, 0, 118);
+            }
+
+            .loggout-btn:hover + .divider-purple {
+                background: linear-gradient(to right, transparent, rgb(253, 0, 118), transparent);
+                animation: flowOutward 0.3s ease-in-out alternate;
+            }
+            .loggout-btn:hover::before {
+                animation: flowOutward 2s ease-in-out alternate;
+                color: rgb(253, 0, 118);
+            }
+        }
+    }
+}
+
+@keyframes right-to-left {
+    from {
+        transform: translateX(200%);
+    }
+    to {
+        transform: translatex(0%);
+    }
+}
+@keyframes flowOutward {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}

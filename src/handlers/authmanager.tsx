@@ -114,10 +114,9 @@ export default function Auth() {
 
             setMessage(isLogin ? `wellcome back ${userForm.username}` : "registerd successfully");
             if (response.ok) navigate("/");
-            else setError("Wrong username or password");
         } catch (e: any) {
             console.error(`Error : ${e}`);
-            setError(e.message);
+            setError("Wrong username or password");
         } finally {
             setLoading(false);
         }
