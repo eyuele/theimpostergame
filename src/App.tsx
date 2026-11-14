@@ -6,6 +6,7 @@ import Auth from "./handlers/authmanager";
 import Home from "./pages/home";
 import Layout from "./pages/layout";
 import NotFound from "./pages/notfound";
+import Profile from "./pages/profile";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
             >
                 <Route index element={<Navigate to="/home" replace />} />
                 <Route path="/home" element={<Home />} />
+                <Route path="/profile" element={<Profile />} />
             </Route>
             <Route path="*" element={<NotFound />} />
         </Routes>
