@@ -13,3 +13,24 @@ pub async fn player_table_handler(pool: &PgPool) {
     .await // MUST AWAIT
     .expect("Failed to create table");
 }
+
+pub async fn player_status_table_handler(pool: &PgPool) {
+    sqlx::query(
+        "
+            create table if not exists playerstats (
+                player_id int primary key references players(id) on delete cascade,
+                times_imposter int default 0,
+                times_civilian int default 0,
+                wins_as_civilian int default 0,
+                wins_as_imposter int default 0,
+                losse_as_civilian int default 0,
+                losse_as_imposter int default 0,                
+                score int default 0,
+                titles text[] default'{}'
+            );
+    ",
+    )
+    .execute(pool)
+    .await
+    .expect("Failed To Create Status Database");
+}
