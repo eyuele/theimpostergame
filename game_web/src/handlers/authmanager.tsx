@@ -116,6 +116,7 @@ export default function Auth() {
             if (response.ok) navigate("/");
         } catch (e: any) {
             console.error(`Error : ${e}`);
+
             setError("Wrong username or password");
         } finally {
             setLoading(false);
