@@ -2,13 +2,13 @@ use std::env;
 
 use axum::{
     Router,
-    http::HeaderValue,
+    http::{HeaderValue, Method, header},
     routing::{get, post},
 };
 use dotenvy::dotenv;
 use sqlx::postgres::PgPoolOptions;
 use tokio::net::TcpListener;
-use tower_http::cors::{Any, CorsLayer};
+use tower_http::cors::CorsLayer;
 use tower_sessions::{Expiry, SessionManagerLayer, cookie::time::Duration};
 use tower_sessions_sqlx_store::PostgresStore;
 mod api;
@@ -41,19 +41,32 @@ async fn main() {
         .expect("Failed to run session migrations");
 
     let session_layer = SessionManagerLayer::new(store)
-        .with_secure(false)
+        .with_secure(true)
         .with_expiry(Expiry::OnInactivity(Duration::hours(24)));
 
     let cors = CorsLayer::new()
         .allow_origin(vec![
             "http://localhost:5173".parse::<HeaderValue>().unwrap(),
-            "https://theimpostorup.vercel.app"
+            "https://impostersup.vercel.app"
                 .parse::<HeaderValue>()
-                .unwrap(), // <-- Add your Vercel URL
+                .unwrap(),
         ])
         .allow_credentials(true)
-        .allow_methods(Any)
-        .allow_headers(Any);
+        .allow_methods([
+            Method::POST,
+            Method::GET,
+            Method::PUT,
+            Method::DELETE,
+            Method::OPTIONS,
+        ])
+        .allow_headers([
+            header::CONTENT_TYPE,
+            header::AUTHORIZATION,
+            header::ACCEPT,
+            header::ORIGIN,
+            header::UPGRADE,
+            header::SEC_WEBSOCKET_KEY,
+        ]);
 
     let api = Router::new()
         .route("/login", post(userauth::login_handler))
