@@ -1,0 +1,18 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  # --- Rust Backend ---
+  - package-ecosystem: "cargo" # See documentation for possible values
+    directory: "/game_api" # Location of package manifests
+    schedule:
+      interval: "weekly"
+      
+  # --- React Frontend ---
+  - package-ecosystem: "npm" # Used for npm, pnpm, and yarn
+    directory: "/game_web" # The directory containing your package.json
+    schedule:
+      interval: "weekly"
