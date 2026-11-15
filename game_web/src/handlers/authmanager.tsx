@@ -10,7 +10,7 @@ interface User {
 
 export default function Auth() {
     const navigate = useNavigate();
-    const API_URL = import.meta.env.BACK_API_URL || "";
+    const API_URL = import.meta.env.VITE_API_URL || "";
 
     const [isLogin, setIsLogin] = useState(true);
     const [userForm, setUserform] = useState<User>({

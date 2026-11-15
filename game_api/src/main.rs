@@ -9,7 +9,10 @@ use dotenvy::dotenv;
 use sqlx::postgres::PgPoolOptions;
 use tokio::net::TcpListener;
 use tower_http::cors::CorsLayer;
-use tower_sessions::{Expiry, SessionManagerLayer, cookie::time::Duration};
+use tower_sessions::{
+    Expiry, SessionManagerLayer,
+    cookie::{SameSite, time::Duration},
+};
 use tower_sessions_sqlx_store::PostgresStore;
 mod api;
 
@@ -42,6 +45,7 @@ async fn main() {
 
     let session_layer = SessionManagerLayer::new(store)
         .with_secure(true)
+        .with_same_site(SameSite::None)
         .with_expiry(Expiry::OnInactivity(Duration::hours(24)));
 
     let cors = CorsLayer::new()
@@ -49,7 +53,10 @@ async fn main() {
             "http://localhost:5173".parse::<HeaderValue>().unwrap(),
             "https://impostersup.vercel.app"
                 .parse::<HeaderValue>()
-                .unwrap(),
+                .unwrap(), // New domain
+            "https://theimpostorup.vercel.app"
+                .parse::<HeaderValue>()
+                .unwrap(), // Old domain
         ])
         .allow_credentials(true)
         .allow_methods([
@@ -72,7 +79,7 @@ async fn main() {
         .route("/login", post(userauth::login_handler))
         .route("/me", get(userauth::me_handler))
         .route("/register", post(userauth::register_handler))
-        .route("/logout", get(userauth::logouthandler));
+        .route("/logout", post(userauth::logouthandler));
     let app = Router::new()
         .nest("/api", api)
         .layer(session_layer)
