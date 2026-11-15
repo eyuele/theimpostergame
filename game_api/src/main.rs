@@ -9,7 +9,10 @@ use dotenvy::dotenv;
 use sqlx::postgres::PgPoolOptions;
 use tokio::net::TcpListener;
 use tower_http::cors::CorsLayer;
-use tower_sessions::{Expiry, SessionManagerLayer, cookie::time::Duration};
+use tower_sessions::{
+    Expiry, SessionManagerLayer,
+    cookie::{SameSite, time::Duration},
+};
 use tower_sessions_sqlx_store::PostgresStore;
 mod api;
 
@@ -42,6 +45,7 @@ async fn main() {
 
     let session_layer = SessionManagerLayer::new(store)
         .with_secure(true)
+        .with_same_site(SameSite::None)
         .with_expiry(Expiry::OnInactivity(Duration::hours(24)));
 
     let cors = CorsLayer::new()
