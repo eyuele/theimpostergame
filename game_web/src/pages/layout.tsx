@@ -45,7 +45,7 @@ export default function Layout() {
             <header className="top-bar">
                 <div className="bar-container">
                     <div className="player-detail">
-                        <img className="pfp-img" src={`/pfp/pfp_${pfpChoice}.webp`} />
+                        <img className="pfp-img" src={`../../public/pfp/pfp_${pfpChoice}.webp`} />
 
                         <p>{username}</p>
                         <img className="name-bage" src={`/badges/badge_${badge}.gif`} />
