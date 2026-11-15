@@ -1,6 +1,10 @@
 import { createContext, useContext } from "react";
 
-export const AuthContext = createContext<{ username: string } | null>(null);
+export interface UserData {
+    username: string;
+    avatar_url: string;
+}
+export const AuthContext = createContext<UserData | null>(null);
 
 export function useUser() {
     const ctx = useContext(AuthContext);

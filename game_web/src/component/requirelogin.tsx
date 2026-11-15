@@ -1,11 +1,11 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Navigate } from "react-router";
-import { AuthContext } from "../pages/authcontext";
+import { AuthContext, type UserData } from "../pages/authcontext";
 
 export default function RequiredLogin({ children }: { children: ReactNode }) {
     const API_URL = import.meta.env.VITE_API_URL || "";
     const [status, setStatus] = useState("loading");
-    const [username, setUsername] = useState("");
+    const [userData, setUserData] = useState<UserData | null>(null);
 
     useEffect(() => {
         fetch(`${API_URL}/api/me`, {
@@ -14,7 +14,7 @@ export default function RequiredLogin({ children }: { children: ReactNode }) {
             .then(async res => {
                 if (res.ok) {
                     const data = await res.json();
-                    setUsername(data.username);
+                    setUserData(data);
                     setStatus("in");
                 } else {
                     setStatus("out");
@@ -25,5 +25,5 @@ export default function RequiredLogin({ children }: { children: ReactNode }) {
 
     if (status === "loading") return <p>Loading...</p>;
     if (status === "out") return <Navigate to="/auth" replace />;
-    return <AuthContext.Provider value={{ username }}>{children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={userData}>{children}</AuthContext.Provider>;
 }
