@@ -80,7 +80,10 @@ input:-webkit-autofill:active {
     display: flex;
     flex-direction: column;
 
-    background: linear-gradient(#050505d9, #000000e3), url("/file_00000000855882129cd524199e246f71.png.webp.webp");
+    background: linear-gradient(#35001983, #000000), url("/file_00000000855882129cd524199e246f71.png.webp.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 body {
