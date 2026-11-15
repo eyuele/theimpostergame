@@ -10,6 +10,8 @@ interface User {
 
 export default function Auth() {
     const navigate = useNavigate();
+    const API_URL = import.meta.env.VITE_API_URL || "";
+
     const [isLogin, setIsLogin] = useState(true);
     const [userForm, setUserform] = useState<User>({
         username: "",
@@ -91,7 +93,7 @@ export default function Auth() {
         setError("");
         const endpoint = isLogin ? "login" : "register";
         try {
-            const response = await fetch(`/api/${endpoint}`, {
+            const response = await fetch(`${API_URL}/api/${endpoint}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
