@@ -1,4 +1,4 @@
-import { useMemo, useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate } from "react-router";
 import "./authmanager.css";
 
@@ -20,7 +20,7 @@ export default function Auth() {
     });
 
     const [welcomeText, setWelcomeText] = useState("");
-
+    //list of the welcome messages
     const welcomeMessages = {
         login: [
             "Welcome back, detective. The lies are already piling up.",
@@ -124,7 +124,7 @@ export default function Auth() {
             setLoading(false);
         }
     };
-    const randomWelcomeHandler = useMemo(() => {
+    const randomWelcomeHandler = useEffect(() => {
         const messages = isLogin ? welcomeMessages.login : welcomeMessages.register;
         const randomemessage = messages[Math.floor(Math.random() * messages.length)];
 

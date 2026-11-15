@@ -16,6 +16,7 @@ pub struct AuthRequest {
 pub struct AuthResponse {
     pub id: i32,
     pub username: String,
+    pub avatar_url: String,
 }
 
 pub const USER_KEY: &str = "user";
@@ -30,7 +31,7 @@ pub async fn me_handler(
     if let Ok(Some(username)) = session.get::<String>(USER_KEY).await {
         let user = sqlx::query_as::<_, AuthResponse>(
             "
-            SELECT id, username FROM players WHERE username = $1
+            SELECT id, username, avatar_url FROM players WHERE username = $1
         ",
         )
         .bind(&username)
@@ -116,17 +117,18 @@ pub async fn login_handler(
     if payload.username.is_empty() || payload.password.is_empty() {
         return Err(StatusCode::UNAUTHORIZED);
     }
-    let row: Option<(i32, String, String)> =
-        sqlx::query_as("SELECT id, username, password_hash FROM players WHERE username = $1 ")
-            .bind(&payload.username)
-            .fetch_optional(&pool)
-            .await
-            .map_err(|e| {
-                eprintln!("🚨 DATABASE ERROR: {:?}", e);
-                StatusCode::INTERNAL_SERVER_ERROR
-            })?;
+    let row: Option<(i32, String, String, String)> = sqlx::query_as(
+        "SELECT id, username, password_hash, avatar_url FROM players WHERE username = $1 ",
+    )
+    .bind(&payload.username)
+    .fetch_optional(&pool)
+    .await
+    .map_err(|e| {
+        eprintln!("🚨 DATABASE ERROR: {:?}", e);
+        StatusCode::INTERNAL_SERVER_ERROR
+    })?;
 
-    let (user_id, username, password_hash) = match row {
+    let (user_id, username, password_hash, avatar_url) = match row {
         Some(data) => data,
         None => return Err(StatusCode::UNAUTHORIZED), // Don't reveal if username exists
     };
@@ -153,6 +155,7 @@ pub async fn login_handler(
     let response = AuthResponse {
         id: user_id,
         username,
+        avatar_url,
     };
 
     Ok((StatusCode::OK, Json(response)))

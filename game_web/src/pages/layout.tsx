@@ -6,11 +6,10 @@ import "./styles/layout.css";
 export default function Layout() {
     const navigate = useNavigate();
     const API_URL = import.meta.env.VITE_API_URL || "";
-    const username = useUser().username;
+    const player = useUser();
     const navs = ["play", "Profile"];
     const [ishidden, setIshidden] = useState(true);
     const [isLoading, setLoading] = useState(false);
-    const pfpChoice = "32";
     const badge = "2";
 
     const handleHidden = () => {
@@ -45,9 +44,9 @@ export default function Layout() {
             <header className="top-bar">
                 <div className="bar-container">
                     <div className="player-detail">
-                        <img className="pfp-img" src={`../../public/pfp/pfp_${pfpChoice}.webp`} />
+                        <img className="pfp-img" src={`${player.avatar_url}`} />
 
-                        <p>{username}</p>
+                        <p>{player.username}</p>
                         <img className="name-bage" src={`/badges/badge_${badge}.gif`} />
                     </div>
 
