@@ -49,7 +49,10 @@ async fn main() {
             "http://localhost:5173".parse::<HeaderValue>().unwrap(),
             "https://impostersup.vercel.app"
                 .parse::<HeaderValue>()
-                .unwrap(),
+                .unwrap(), // New domain
+            "https://theimpostorup.vercel.app"
+                .parse::<HeaderValue>()
+                .unwrap(), // Old domain
         ])
         .allow_credentials(true)
         .allow_methods([
