@@ -160,15 +160,15 @@ Run the checks for the part you changed. From the repository root:
 
 ## Contributing and collaborating
 
-Please work on a branch and open a pull request into `main`. Do not commit or push work directly to `main`, and do not force-push.
+Use `beta` as the integration branch: start feature branches from `beta` and open pull requests into `beta`. Once changes in `beta` are ready for release, open a separate pull request from `beta` into `main`. Do not commit or push work directly to `beta` or `main`, and do not force-push.
 
 ### Start a task
 
-Update your local `main`, then create a descriptively named branch:
+Update your local `beta`, then create a descriptively named branch:
 
 ```sh
-git switch main
-git pull --ff-only origin main
+git switch beta
+git pull --ff-only origin beta
 git switch -c feature/short-description
 ```
 
@@ -176,12 +176,12 @@ Use names such as `feature/game-room`, `fix/login-error`, or `docs/local-setup`.
 
 ### Keep your branch up to date
 
-Before pushing or opening/updating a pull request, merge the latest `main` into your feature branch:
+Before pushing or opening/updating a pull request, merge the latest `beta` into your feature branch:
 
 ```sh
 git fetch origin
 git switch feature/short-description
-git merge origin/main
+git merge origin/beta
 ```
 
 If Git reports conflicts, resolve them, test the result, and commit the merge if Git asks. If your push is rejected because the remote feature branch has new commits, fetch and merge that branch before trying again:
@@ -204,7 +204,7 @@ git commit -m "Describe the change"
 git push -u origin feature/short-description
 ```
 
-Open a pull request from your branch into `main`. In the pull request description, explain what changed, why, how you tested it, and include screenshots for visible UI changes when useful. Ask for review and address discussion on the pull request before merging.
+Open a pull request from your feature branch into `beta`. In the pull request description, explain what changed, why, how you tested it, and include screenshots for visible UI changes when useful. Ask for review and address discussion on the pull request before merging. When the changes in `beta` are ready for release, open a pull request from `beta` into `main`.
 
 ### Discuss work
 
