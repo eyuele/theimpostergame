@@ -3,6 +3,7 @@ import { NavLink } from "react-router";
 import "./styles/home.css";
 
 export default function Home() {
+    const API_URL = import.meta.env.VITE_API_URL || "";
     const titles = {
         civilian: ["Sherlock"],
         imposter: ["Wolf in Sheep's Clothing"],
