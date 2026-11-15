@@ -6,6 +6,7 @@ pub async fn player_table_handler(pool: &PgPool) {
             id SERIAL PRIMARY KEY,
             username VARCHAR(50) UNIQUE NOT NULL,
             password_hash VARCHAR(255) NOT NULL,
+            avatar_url VARCHAR(255) DEFAULT '/pfp/pfp_01.webp',
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );",
     )

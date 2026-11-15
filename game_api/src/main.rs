@@ -2,11 +2,13 @@ use std::env;
 
 use axum::{
     Router,
+    http::HeaderValue,
     routing::{get, post},
 };
 use dotenvy::dotenv;
 use sqlx::postgres::PgPoolOptions;
 use tokio::net::TcpListener;
+use tower_http::cors::{Any, CorsLayer};
 use tower_sessions::{Expiry, SessionManagerLayer, cookie::time::Duration};
 use tower_sessions_sqlx_store::PostgresStore;
 mod api;
@@ -42,9 +44,16 @@ async fn main() {
         .with_secure(false)
         .with_expiry(Expiry::OnInactivity(Duration::hours(24)));
 
-    let listener = TcpListener::bind("127.0.0.1:12659").await.unwrap();
-
-    println!("Listening on: {}", listener.local_addr().unwrap());
+    let cors = CorsLayer::new()
+        .allow_origin(vec![
+            "http://localhost:5173".parse::<HeaderValue>().unwrap(),
+            "https://theimpostorup.vercel.app"
+                .parse::<HeaderValue>()
+                .unwrap(), // <-- Add your Vercel URL
+        ])
+        .allow_credentials(true)
+        .allow_methods(Any)
+        .allow_headers(Any);
 
     let api = Router::new()
         .route("/login", post(userauth::login_handler))
@@ -54,6 +63,16 @@ async fn main() {
     let app = Router::new()
         .nest("/api", api)
         .layer(session_layer)
+        .layer(cors)
         .with_state(pool);
+
+    let port = std::env::var("PORT").unwrap_or_else(|_| "12659".to_string());
+
+    let listener = TcpListener::bind(format!("0.0.0.0:{}", port))
+        .await
+        .unwrap();
+
+    println!("Listening on: {}", listener.local_addr().unwrap());
+
     axum::serve(listener, app).await.expect("Whats going on");
 }
