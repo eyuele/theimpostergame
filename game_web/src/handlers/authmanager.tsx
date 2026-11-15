@@ -10,7 +10,6 @@ interface User {
 
 export default function Auth() {
     const navigate = useNavigate();
-
     const [isLogin, setIsLogin] = useState(true);
     const [userForm, setUserform] = useState<User>({
         username: "",
@@ -100,6 +99,7 @@ export default function Auth() {
             });
 
             const textData = await response.text();
+
             let data;
             try {
                 data = JSON.parse(textData);

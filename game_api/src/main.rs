@@ -11,7 +11,7 @@ use tower_sessions::{Expiry, SessionManagerLayer, cookie::time::Duration};
 use tower_sessions_sqlx_store::PostgresStore;
 mod api;
 
-use crate::api::{dbhandler::player_table_handler, userauth};
+use crate::api::{dbhandler, userauth};
 
 #[tokio::main]
 async fn main() {
@@ -26,7 +26,11 @@ async fn main() {
         .await
         .expect("Failed to connect to Postgres");
 
-    player_table_handler(&pool).await;
+    //create the database if they dont exist
+    // reference the dbhandler.rs file in the /api folder for more information
+
+    dbhandler::player_table_handler(&pool).await;
+    dbhandler::player_status_table_handler(&pool).await;
 
     let store = PostgresStore::new(pool.clone());
     store
