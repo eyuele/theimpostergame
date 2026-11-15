@@ -3,11 +3,12 @@ import { Navigate } from "react-router";
 import { AuthContext } from "../pages/authcontext";
 
 export default function RequiredLogin({ children }: { children: ReactNode }) {
+    const API_URL = import.meta.env.BACK_API_URL || "";
     const [status, setStatus] = useState("loading");
     const [username, setUsername] = useState("");
 
     useEffect(() => {
-        fetch("/api/me")
+        fetch(`${API_URL}/api/me`)
             .then(async res => {
                 if (res.ok) {
                     const data = await res.json();
