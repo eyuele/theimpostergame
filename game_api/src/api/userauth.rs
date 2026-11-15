@@ -79,7 +79,7 @@ pub async fn register_handler(
         "
         INSERT INTO players (username, password_hash) 
         VALUES ($1, $2)
-        RETURNING id, username
+        RETURNING id, username, avatar_url
         ",
     )
     .bind(payload.username.clone())
