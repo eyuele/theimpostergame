@@ -5,7 +5,7 @@ import "./styles/layout.css";
 
 export default function Layout() {
     const navigate = useNavigate();
-    const API_URL = import.meta.env.VITE_API_URL || "";
+    const API_URL = import.meta.env.BACK_API_URL || "";
     const username = useUser().username;
     const navs = ["play", "Profile"];
     const [ishidden, setIshidden] = useState(true);
