@@ -10,7 +10,6 @@ export default function Layout() {
     const navs = ["play", "Profile"];
     const [ishidden, setIshidden] = useState(true);
     const [isLoading, setLoading] = useState(false);
-    const pfpChoice = "32";
     const badge = "2";
 
     const handleHidden = () => {
