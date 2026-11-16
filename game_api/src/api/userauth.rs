@@ -109,6 +109,14 @@ pub async fn register_handler(
     }
 }
 
+#[derive(sqlx::FromRow)]
+struct PlayerRow {
+    id: i32,
+    username: String,
+    password_hash: String,
+    avatar_url: String, // ⚠️ see nullability note below
+}
+
 pub async fn login_handler(
     State(pool): State<PgPool>,
     session: Session,
@@ -117,7 +125,7 @@ pub async fn login_handler(
     if payload.username.is_empty() || payload.password.is_empty() {
         return Err(StatusCode::UNAUTHORIZED);
     }
-    let row: Option<(i32, String, String, String)> = sqlx::query_as(
+    let row: Option<PlayerRow> = sqlx::query_as(
         "SELECT id, username, password_hash, avatar_url FROM players WHERE username = $1 ",
     )
     .bind(&payload.username)
@@ -128,17 +136,18 @@ pub async fn login_handler(
         StatusCode::INTERNAL_SERVER_ERROR
     })?;
 
-    let (user_id, username, password_hash, avatar_url) = match row {
+    let player = match row {
         Some(data) => data,
-        None => return Err(StatusCode::UNAUTHORIZED), // Don't reveal if username exists
+        None => return Err(StatusCode::UNAUTHORIZED),
     };
 
     // 4. Verify the password
     let password_check = payload.password.clone();
-    let is_valid =
-        tokio::task::spawn_blocking(move || verify_password(&password_check, &password_hash))
-            .await
-            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+    let is_valid = tokio::task::spawn_blocking(move || {
+        verify_password(&password_check, &player.password_hash)
+    })
+    .await
+    .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
     if !is_valid {
         return Err(StatusCode::UNAUTHORIZED);
     }
@@ -153,9 +162,9 @@ pub async fn login_handler(
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
     let response = AuthResponse {
-        id: user_id,
-        username,
-        avatar_url,
+        id: player.id,
+        username: player.username,
+        avatar_url: player.avatar_url,
     };
 
     Ok((StatusCode::OK, Json(response)))
