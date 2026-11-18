@@ -14,3 +14,4 @@ tower-sessions = "0.15.0"
 dotenvy = "0.15.7"
 argon2 = { version = "0.6.0", features = ["getrandom"] }
 tower-sessions-sqlx-store = { version = "0.16.0", features = ["postgres"] }
+rand =  "0.10.3"

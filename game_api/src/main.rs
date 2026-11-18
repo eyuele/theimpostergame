@@ -79,7 +79,8 @@ async fn main() {
         .route("/login", post(userauth::login_handler))
         .route("/me", get(userauth::me_handler))
         .route("/register", post(userauth::register_handler))
-        .route("/logout", post(userauth::logouthandler));
+        .route("/logout", post(userauth::logouthandler))
+        .route("/pfp_setter", post(userauth::user_pfp_handler));
     let app = Router::new()
         .nest("/api", api)
         .layer(session_layer)
