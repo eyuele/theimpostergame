@@ -114,7 +114,7 @@ struct PlayerRow {
     id: i32,
     username: String,
     password_hash: String,
-    avatar_url: String,
+    avatar_url: String, // ⚠️ see nullability note below
 }
 
 pub async fn login_handler(
