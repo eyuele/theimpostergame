@@ -22,8 +22,9 @@ export default function RequiredLogin({ children }: { children: ReactNode }) {
             })
             .catch(() => setStatus("out"));
     }, []);
+    if (!userData) return <p>Loading...</p>;
 
     if (status === "loading") return <p>Loading...</p>;
     if (status === "out") return <Navigate to="/auth" replace />;
-    return <AuthContext.Provider value={userData}>{children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={{ user: userData, setUser: setUserData }}>{children}</AuthContext.Provider>;
 }

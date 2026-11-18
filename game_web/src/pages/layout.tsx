@@ -5,9 +5,10 @@ import "./styles/layout.css";
 
 export default function Layout() {
     const navigate = useNavigate();
+    const user = useUser().user;
     const API_URL = import.meta.env.VITE_API_URL || "";
     const player = useUser();
-    const navs = ["play", "Profile"];
+    const navs = ["home", "play", "Profile"];
     const [ishidden, setIshidden] = useState(true);
     const [isLoading, setLoading] = useState(false);
     const badge = "2";
@@ -44,9 +45,10 @@ export default function Layout() {
             <header className="top-bar">
                 <div className="bar-container">
                     <div className="player-detail">
-                        <img className="pfp-img" src={`/pfp/${player.avatar_url}.webp`} />
+                        <img className="pfp-img" src={`/pfp/${user.avatar_url}.webp`} />
 
-                        <p>{player.username}</p>
+                        <p>{user.username}</p>
+
                         <img className="name-bage" src={`/badges/badge_${badge}.gif`} />
                     </div>
 
@@ -62,7 +64,7 @@ export default function Layout() {
                     <ul>
                         {navs.map(n => (
                             <div>
-                                <NavLink key={n} className={"nav-li"} to={`/${n}`}>
+                                <NavLink key={n} onClick={handleHidden} className={"nav-li"} to={`/${n}`}>
                                     {n}
                                 </NavLink>
                                 <span className="divider-purple"></span>
