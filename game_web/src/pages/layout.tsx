@@ -7,7 +7,7 @@ export default function Layout() {
     const navigate = useNavigate();
     const user = useUser().user;
     const API_URL = import.meta.env.VITE_API_URL || "";
-    const player = useUser();
+
     const navs = ["home", "play", "Profile"];
     const [ishidden, setIshidden] = useState(true);
     const [isLoading, setLoading] = useState(false);
