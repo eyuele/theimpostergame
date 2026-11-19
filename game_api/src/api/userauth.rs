@@ -172,7 +172,7 @@ pub async fn login_handler(
 
 // this part of the code handles the logout
 
-pub async fn logouthandler(session: Session) -> Result<StatusCode, StatusCode> {
+pub async fn logout_handler(session: Session) -> Result<StatusCode, StatusCode> {
     session.clear().await;
     session
         .flush()
