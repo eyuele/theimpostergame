@@ -19,10 +19,10 @@
         z-index: 1000;
         top: 0;
         background: var(--bg-2);
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(5px);
         display: flex;
         justify-content: center;
-        padding: 1rem;
+        padding: 10px;
         border-bottom: 1px solid var(--accent-border);
         align-items: center;
         .bar-container {
@@ -32,11 +32,22 @@
             align-items: center;
 
             justify-content: space-between;
+            transition: 0.5s;
+
+            h3 {
+                text-transform: uppercase;
+            }
             .player-detail {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 gap: 1em;
+
+                border: 1px solid var(--accent-border);
+                border-radius: 50px;
+                padding: 5px 10px;
+
+                background: var(--bg);
                 p {
                     text-transform: uppercase;
                 }
@@ -161,4 +172,14 @@
 main {
     width: 100%;
     height: 100%;
+}
+
+@media (width<=760px) {
+    .top-bar {
+        .bar-container {
+            h3 {
+                display: none;
+            }
+        }
+    }
 }

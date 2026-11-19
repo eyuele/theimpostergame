@@ -7,6 +7,7 @@ use axum::{
     routing::{get, post},
 };
 use dotenvy::dotenv;
+
 use sqlx::postgres::PgPoolOptions;
 use tokio::net::TcpListener;
 use tower_http::cors::CorsLayer;
@@ -18,7 +19,7 @@ use tower_sessions::{
 use tower_sessions_sqlx_store::PostgresStore;
 mod api;
 
-use crate::api::{auth_middleware, dbhandler, userauth};
+use crate::api::{auth_middleware, dbhandler, game_utils, userauth};
 
 #[tokio::main]
 async fn main() {
@@ -84,7 +85,8 @@ async fn main() {
     let protected_layer = Router::new()
         .route("/me", get(userauth::me_handler))
         .route("/logout", post(userauth::logout_handler))
-        .route("/pfp_setter", post(userauth::user_pfp_handler))
+        .route("/pfp_setter", post(game_utils::user_pfp_handler))
+        .route("/pass_change", post(game_utils::pass_change_handler))
         .route_layer(middleware::from_fn(auth_middleware::require_login));
 
     let api = Router::new().merge(public_layer).merge(protected_layer);
