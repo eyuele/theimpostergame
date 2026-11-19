@@ -221,7 +221,7 @@ export default function Auth() {
                             />
 
                             <button type="submit" disabled={loading}>
-                                Register
+                                {!loading ? "Register" : "Loading..."}
                             </button>
                         </form>
                         <p>{error === "" ? message : error}</p>

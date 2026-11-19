@@ -3,12 +3,14 @@ use std::env;
 use axum::{
     Router,
     http::{HeaderValue, Method, header},
+    middleware,
     routing::{get, post},
 };
 use dotenvy::dotenv;
 use sqlx::postgres::PgPoolOptions;
 use tokio::net::TcpListener;
 use tower_http::cors::CorsLayer;
+use tower_http::trace::TraceLayer;
 use tower_sessions::{
     Expiry, SessionManagerLayer,
     cookie::{SameSite, time::Duration},
@@ -16,7 +18,7 @@ use tower_sessions::{
 use tower_sessions_sqlx_store::PostgresStore;
 mod api;
 
-use crate::api::{dbhandler, userauth};
+use crate::api::{auth_middleware, dbhandler, userauth};
 
 #[tokio::main]
 async fn main() {
@@ -75,16 +77,23 @@ async fn main() {
             header::SEC_WEBSOCKET_KEY,
         ]);
 
-    let api = Router::new()
+    let public_layer = Router::new()
         .route("/login", post(userauth::login_handler))
+        .route("/register", post(userauth::register_handler));
+
+    let protected_layer = Router::new()
         .route("/me", get(userauth::me_handler))
-        .route("/register", post(userauth::register_handler))
-        .route("/logout", post(userauth::logouthandler))
-        .route("/pfp_setter", post(userauth::user_pfp_handler));
+        .route("/logout", post(userauth::logout_handler))
+        .route("/pfp_setter", post(userauth::user_pfp_handler))
+        .route_layer(middleware::from_fn(auth_middleware::require_login));
+
+    let api = Router::new().merge(public_layer).merge(protected_layer);
+
     let app = Router::new()
         .nest("/api", api)
         .layer(session_layer)
         .layer(cors)
+        .layer(TraceLayer::new_for_http())
         .with_state(pool);
 
     let port = std::env::var("PORT").unwrap_or_else(|_| "12659".to_string());
