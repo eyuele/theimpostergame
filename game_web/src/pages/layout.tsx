@@ -64,21 +64,23 @@ export default function Layout() {
             </header>
             {!ishidden && (
                 <nav className="navigation">
-                    <ul>
-                        {navs.map(n => (
-                            <div>
-                                <NavLink key={n} onClick={handleHidden} className={"nav-li"} to={`/${n}`}>
-                                    {n}
-                                </NavLink>
-                                <span className="divider-purple"></span>
-                            </div>
-                        ))}
+                    <div onClick={handleHidden} className={`back-cover ${ishidden ? `hidden` : "active"}`}></div>
+                    <div className="navigation-container">
+                        <ul>
+                            {navs.map(n => (
+                                <div key={n}>
+                                    <NavLink key={n} onClick={handleHidden} className={"nav-li"} to={`/${n}`}>
+                                        {n}
+                                    </NavLink>
+                                    <span className="divider-purple"></span>
+                                </div>
+                            ))}
 
-                        <button className="loggout-btn" onClick={loggoutHandler}>
-                            {isLoading === true ? "Loading..." : "Logout"}
-                        </button>
-                        <span className="divider-purple"></span>
-                    </ul>
+                            <button className="loggout-btn" onClick={loggoutHandler}>
+                                {isLoading === true ? "Loading..." : "Logout"}
+                            </button>
+                        </ul>
+                    </div>
                 </nav>
             )}
             <main>
