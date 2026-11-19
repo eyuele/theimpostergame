@@ -54,7 +54,6 @@
                 .pfp-img {
                     height: 100%;
                     width: 50px;
-                    border-radius: 100%;
                 }
                 .name-bage {
                     width: 60px;
@@ -78,76 +77,87 @@
         position: absolute;
         display: flex;
         flex-direction: column;
-        height: 100%;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
         width: 100%;
-        max-width: 20em;
+
         top: 0;
-        backdrop-filter: blur(8px);
-        right: 0em;
-        background: var(--bg-2);
+        left: 0;
         padding: 1em;
-        border-left: 1px solid var(--accent-border);
+
         transition: 0.25s;
         animation: right-to-left 0.35s ease-in-out forwards;
-        z-index: 700;
+        z-index: 1;
+        .navigation-container {
+            z-index: 700;
 
-        ul {
-            display: flex;
+            background: var(--bg-2);
+            border: 1px solid var(--accent-border);
+            backdrop-filter: blur(10px);
             width: 100%;
+            max-width: 40em;
+            border-radius: 1em;
+            display: flex;
             flex-direction: column;
-
-            padding-top: 5rem;
-            div {
+            justify-content: center;
+            align-items: center;
+            padding: 2em;
+            ul {
                 display: flex;
-                flex-direction: column;
                 width: 100%;
-                .nav-li {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 1rem;
-                    width: 100%;
-                    text-decoration: none;
-                    color: var(--text);
-                    width: 100%;
-                    text-transform: uppercase;
+                flex-direction: column;
 
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    .nav-li {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 1rem;
+                        width: 100%;
+                        text-decoration: none;
+                        color: var(--text);
+                        width: 100%;
+                        text-transform: uppercase;
+
+                        transition: 0.35s;
+                    }
+                    .nav-li:hover + .divider-purple {
+                        background: linear-gradient(to right, transparent, var(--color-cyan), transparent);
+                        animation: flowOutward 0.35s ease-out both;
+                        transform-origin: left center;
+                    }
+                    .nav-li:hover {
+                        color: var(--color-cyan);
+                    }
+                }
+
+                .loggout-btn {
+                    font-family: "Times New Roman", Times, serif;
+                    text-transform: uppercase;
+                    position: relative;
+                    font-size: 18px;
+                    width: 100%;
+                    overflow: hidden;
+                    padding: 1rem;
+                    background: transparent;
+                    border: none;
+                    color: var(--accent-border);
+                    cursor: pointer;
                     transition: 0.35s;
                 }
-                .nav-li:hover + .divider-purple {
-                    background: linear-gradient(to right, transparent, rgb(0, 249, 253), transparent);
-                    animation: flowOutward 0.3s ease-in-out alternate;
+                .loggout-btn:hover {
+                    color: var(--color-magenta);
                 }
-                .nav-li:hover {
-                    color: rgb(0, 249, 253);
+
+                .loggout-btn:hover + .divider-purple {
+                    background: linear-gradient(to right, transparent, var(--color-magenta), transparent);
+                    animation: flowOutward 0.35s ease-out both;
+                    transform-origin: left center;
                 }
-            }
-
-            .loggout-btn {
-                font-family: "Times New Roman", Times, serif;
-                text-transform: uppercase;
-                position: relative;
-                font-size: 18px;
-                width: 100%;
-                overflow: hidden;
-                padding: 1rem;
-                background: transparent;
-                border: none;
-                color: var(--accent-border);
-                cursor: pointer;
-                transition: 0.35s;
-            }
-            .loggout-btn:hover {
-                color: rgb(253, 0, 118);
-            }
-
-            .loggout-btn:hover + .divider-purple {
-                background: linear-gradient(to right, transparent, rgb(253, 0, 118), transparent);
-                animation: flowOutward 0.3s ease-in-out alternate;
-            }
-            .loggout-btn:hover::before {
-                animation: flowOutward 2s ease-in-out alternate;
-                color: rgb(253, 0, 118);
             }
         }
     }
@@ -158,7 +168,7 @@
         transform: translateX(200%);
     }
     to {
-        transform: translatex(0%);
+        transform: translateX(0%);
     }
 }
 @keyframes flowOutward {
@@ -172,6 +182,9 @@
 main {
     width: 100%;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 @media (width<=760px) {

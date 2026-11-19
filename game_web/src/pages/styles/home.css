@@ -50,7 +50,7 @@ button {
     color: var(--text);
     font-weight: 600;
     padding: 1em;
-    box-shadow: 5px 5px 0px rgb(0, 0, 0);
+    box-shadow: 5px 5px 0 var(--color-shadow);
     transform-origin: center;
     transition: 0.3s ease-in-out;
     border-radius: 4px;
@@ -59,7 +59,7 @@ button {
 .play-btn-container .card-container .card .nav-li:hover {
     background: var(--bg-2);
     border: 1px solid var(--accent-bg);
-    color: var(--accent-bg);
+    color: var(--color-cyan);
     scale: 1.01;
     transform: translateY(-4px);
 }
@@ -73,7 +73,7 @@ button {
 }
 
 .title-list {
-    background: linear-gradient(to right, transparent, rgba(27, 0, 32, 0.841), transparent);
+    background: linear-gradient(to right, transparent, var(--color-panel), transparent);
     padding: 1em;
     .card-container {
         display: flex;
@@ -85,20 +85,20 @@ button {
             border-radius: 4px;
         }
         .civilian {
-            border: 1px solid rgb(0, 190, 13);
-            box-shadow: 3px 3px 0 rgb(17, 255, 0);
+            border: 1px solid var(--color-green);
+            box-shadow: 3px 3px 0 var(--color-green);
         }
         .imposter {
-            border: 1px solid rgb(190, 25, 0);
-            box-shadow: 3px 3px 0 rgb(201, 0, 84);
+            border: 1px solid var(--color-red);
+            box-shadow: 3px 3px 0 var(--color-magenta);
         }
         .tragic {
-            border: 1px solid rgb(0, 190, 165);
-            box-shadow: 3px 3px 0 rgb(0, 188, 201);
+            border: 1px solid var(--color-teal);
+            box-shadow: 3px 3px 0 var(--color-cyan);
         }
         .others {
-            border: 1px solid rgb(190, 159, 0);
-            box-shadow: 3px 3px 0 orange;
+            border: 1px solid var(--color-gold);
+            box-shadow: 3px 3px 0 var(--color-gold);
         }
     }
 }
