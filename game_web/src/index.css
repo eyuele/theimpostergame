@@ -8,54 +8,59 @@
 }
 
 :root {
-    --text: #6b6375;
-    --text-h: #08060d;
-    --bg: #fff;
-    --border: #e5e4e7;
-    --code-bg: #f4f3ec;
-    --accent: #aa3bff;
-    --accent-bg: rgba(170, 59, 255, 0.1);
-    --accent-border: rgba(170, 59, 255, 0.5);
-    --social-bg: rgba(244, 243, 236, 0.5);
-    --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    color-scheme: dark;
 
-    --sans: system-ui, "Segoe UI", Roboto, sans-serif;
-    --heading: system-ui, "Segoe UI", Roboto, sans-serif;
-    --mono: ui-monospace, Consolas, monospace;
+    /* Deep atmospheric surfaces */
+    --color-void: #070312;
+    --color-midnight: #140829;
+    --color-panel: rgba(24, 9, 48, 0.86);
+    --color-panel-solid: #1b0a38;
 
-    font: 18px/145% var(--sans);
-    letter-spacing: 0.18px;
-    color-scheme: light dark;
-    color: var(--text);
-    background: var(--bg);
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    /* High-contrast text & borders */
+    --color-text: #fbf6ff;
+    --color-muted: #d8c4f5;
+    --color-purple: #c85aff;
+    --color-purple-deep: #8c1aff;
+    --color-purple-glow: rgba(200, 90, 255, 0.65);
+    --color-purple-wash: rgba(141, 26, 255, 0.49);
+
+    /* Vivid role & state accents */
+    --color-cyan: #00f7ff;
+    --color-magenta: #ff0051;
+    --color-green: #2bff75;
+    --color-red: #ff2a4b;
+    --color-teal: #00e5cc;
+    --color-gold: #ffbe1a;
+
+    /* Borders, overlays & shadows */
+    --color-border: rgba(208, 115, 255, 0.68);
+    --color-border-subtle: rgba(185, 125, 255, 0.28);
+    --color-social-wash: rgba(200, 90, 255, 0.2);
+    --color-overlay: rgba(12, 4, 26, 0.58);
+    --color-scrim: rgba(6, 2, 14, 0.45);
+    --color-shadow: rgba(0, 0, 0, 0.75);
+    --color-shadow-soft: rgba(0, 0, 0, 0.45);
+
+    /* Semantic aliases */
+    --text: var(--color-text);
+    --text-h: var(--color-muted);
+    --bg: var(--color-void);
+    --bg-2: var(--color-panel);
+    --border: var(--color-border-subtle);
+    --code-bg: var(--color-midnight);
+    --accent: var(--color-purple);
+    --accent-bg: var(--color-purple-wash);
+    --accent-border: var(--color-border);
+    --social-bg: var(--color-social-wash);
+    --shadow: var(--color-shadow) 0 12px 28px -4px, var(--color-shadow-soft) 0 4px 10px -2px;
 
     @media (max-width: 1024px) {
         font-size: 16px;
     }
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --text: #e8d8ff;
-        --text-h: rgb(134, 109, 147);
-        --bg: #16171d;
-        --border: #353c5b;
-        --code-bg: rgb(86, 0, 40);
-        --accent: #be84fc;
-        --bg-2: #0b0016b0;
-        --accent-bg: rgb(214, 0, 86);
-        --accent-border: #ae00ff;
-        --social-bg: rgba(47, 48, 58, 0.5);
-        --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-    }
-
-    #social .button-icon {
-        filter: invert(1) brightness(2);
-    }
+#social .button-icon {
+    filter: invert(1) brightness(2);
 }
 
 input:-webkit-autofill,
@@ -63,9 +68,9 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     /* Change this hex code to match your exact input background color */
-    -webkit-box-shadow: 0 0 0 30px #0f0a1c inset !important;
+    -webkit-box-shadow: 0 0 0 30px var(--color-panel-solid) inset !important;
     /* Change this to your desired text color */
-    -webkit-text-fill-color: white !important;
+    -webkit-text-fill-color: var(--color-text) !important;
     transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -79,7 +84,7 @@ input:-webkit-autofill:active {
     display: flex;
     flex-direction: column;
 
-    background: linear-gradient(#35001983, #000000), url("/background.webp");
+    background: linear-gradient(var(--color-overlay), var(--color-void)), url("/background.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -91,6 +96,7 @@ body {
 }
 
 .divider-purple {
+    display: block;
     width: 100%;
     height: 1px;
 
@@ -103,7 +109,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #0000008a;
+    background: var(--color-scrim);
     z-index: 4;
     backdrop-filter: blur(5px);
 }

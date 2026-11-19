@@ -79,6 +79,7 @@ export default function Layout() {
                             <button className="loggout-btn" onClick={loggoutHandler}>
                                 {isLoading === true ? "Loading..." : "Logout"}
                             </button>
+                            <span className="divider-purple"></span>
                         </ul>
                     </div>
                 </nav>

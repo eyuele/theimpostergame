@@ -54,7 +54,6 @@
                 .pfp-img {
                     height: 100%;
                     width: 50px;
-                    border-radius: 100%;
                 }
                 .name-bage {
                     width: 60px;
@@ -97,13 +96,13 @@
             border: 1px solid var(--accent-border);
             backdrop-filter: blur(10px);
             width: 100%;
-            max-width: 80em;
+            max-width: 40em;
             border-radius: 1em;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 1em;
+            padding: 2em;
             ul {
                 display: flex;
                 width: 100%;
@@ -127,11 +126,12 @@
                         transition: 0.35s;
                     }
                     .nav-li:hover + .divider-purple {
-                        background: linear-gradient(to right, transparent, rgb(0, 249, 253), transparent);
-                        animation: flowOutward 0.3s ease-in-out alternate;
+                        background: linear-gradient(to right, transparent, var(--color-cyan), transparent);
+                        animation: flowOutward 0.35s ease-out both;
+                        transform-origin: left center;
                     }
                     .nav-li:hover {
-                        color: rgb(0, 249, 253);
+                        color: var(--color-cyan);
                     }
                 }
 
@@ -150,12 +150,13 @@
                     transition: 0.35s;
                 }
                 .loggout-btn:hover {
-                    color: rgb(253, 0, 118);
+                    color: var(--color-magenta);
                 }
 
                 .loggout-btn:hover + .divider-purple {
-                    background: linear-gradient(to right, transparent, rgb(253, 0, 118), transparent);
-                    animation: flowOutward 0.3s ease-in-out alternate;
+                    background: linear-gradient(to right, transparent, var(--color-magenta), transparent);
+                    animation: flowOutward 0.35s ease-out both;
+                    transform-origin: left center;
                 }
             }
         }
@@ -181,6 +182,9 @@
 main {
     width: 100%;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 @media (width<=760px) {
