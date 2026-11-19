@@ -9,8 +9,6 @@ export default function Profile() {
     const [ishidden, setishidden] = useState(true);
     const [userpfp, setUserPfp] = useState(`${user.avatar_url}`);
 
-    console.log(user.id, user.avatar_url, user.username, userpfp);
-
     const PFP_OPTIONS = Array.from({ length: 52 }, (_, index) => `pfp_${index + 1}`);
 
     const hiddenHandler = () => {
