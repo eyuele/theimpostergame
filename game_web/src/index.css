@@ -72,7 +72,6 @@ input:-webkit-autofill:active {
 #root {
     width: 100%;
     max-width: 100%;
-    height: 100vh;
     margin: 0 auto;
     text-align: center;
     border-inline: 1px solid var(--border);
@@ -80,10 +79,11 @@ input:-webkit-autofill:active {
     display: flex;
     flex-direction: column;
 
-    background: linear-gradient(#35001983, #000000), url("../public/background.webp");
+    background: linear-gradient(#35001983, #000000), url("/background.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
 }
 
 body {
