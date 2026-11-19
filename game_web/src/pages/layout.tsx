@@ -11,7 +11,7 @@ export default function Layout() {
     const navs = ["home", "play", "Profile"];
     const [ishidden, setIshidden] = useState(true);
     const [isLoading, setLoading] = useState(false);
-    const badge = "2";
+    const badge = "9";
 
     const site_name = "impostersup";
 
