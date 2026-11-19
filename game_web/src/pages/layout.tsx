@@ -13,6 +13,8 @@ export default function Layout() {
     const [isLoading, setLoading] = useState(false);
     const badge = "2";
 
+    const site_name = "impostersup";
+
     const handleHidden = () => {
         setIshidden(prev => !prev);
     };
@@ -44,6 +46,7 @@ export default function Layout() {
         <div className="layout-container">
             <header className="top-bar">
                 <div className="bar-container">
+                    <h3>{site_name}</h3>
                     <div className="player-detail">
                         <img className="pfp-img" src={`/pfp/${user.avatar_url}.webp`} />
 

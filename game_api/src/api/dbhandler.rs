@@ -24,8 +24,8 @@ pub async fn player_status_table_handler(pool: &PgPool) {
                 times_civilian int default 0,
                 wins_as_civilian int default 0,
                 wins_as_imposter int default 0,
-                losse_as_civilian int default 0,
-                losse_as_imposter int default 0,                
+                loss_as_civilian int default 0,
+                loss_as_imposter int default 0,                
                 score int default 0,
                 titles text[] default'{}'
             );

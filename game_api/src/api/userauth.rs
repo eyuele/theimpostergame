@@ -48,14 +48,14 @@ pub async fn me_handler(
     }
 }
 
-fn hashpassword(password: &str) -> String {
+pub fn hashpassword(password: &str) -> String {
     Argon2::default()
         .hash_password(&password.as_bytes())
         .expect("hahs failed")
         .to_string()
 }
 
-fn verify_password(password: &str, storedhash: &str) -> bool {
+pub fn verify_password(password: &str, storedhash: &str) -> bool {
     let Ok(parsed) = PasswordHash::new(storedhash) else {
         return false;
     };
@@ -179,43 +179,4 @@ pub async fn logout_handler(session: Session) -> Result<StatusCode, StatusCode> 
         .await
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
     Ok(StatusCode::NO_CONTENT)
-}
-
-#[derive(Deserialize, Serialize)]
-pub struct UserPfp {
-    pfp: String,
-}
-
-pub async fn user_pfp_handler(
-    State(pool): State<PgPool>,
-    session: Session,
-    Json(payload): Json<UserPfp>,
-) -> Result<Json<UserPfp>, StatusCode> {
-    let username = session
-        .get::<String>(USER_KEY)
-        .await
-        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
-        .ok_or(StatusCode::UNAUTHORIZED)?;
-
-    let res = sqlx::query_as(
-        "
-        update players 
-        SET avatar_url = $1 
-        WHERE username = $2
-        RETURNING avatar_url
-        ",
-    )
-    .bind(payload.pfp)
-    .bind(&username)
-    .fetch_optional(&pool)
-    .await
-    .map_err(|e| {
-        eprintln!("🚨 DB ERROR (Update PFP): {:?}", e);
-        StatusCode::INTERNAL_SERVER_ERROR
-    })?;
-
-    match res {
-        Some((n,)) => Ok(Json(UserPfp { pfp: n })),
-        None => Err(StatusCode::NOT_FOUND),
-    }
 }
