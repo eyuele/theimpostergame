@@ -70,8 +70,8 @@ importers:
         specifier: ^8.3.8
         version: 8.3.8(@types/node@24.19.2)
       vite-plugin-geo:
-        specifier: ^0.2.2
-        version: 0.2.2(vite@8.3.8(@types/node@24.19.2))
+        specifier: ^0.3.0
+        version: 0.3.0(vite@8.3.8(@types/node@24.19.2))
 
 packages:
 
@@ -990,8 +990,8 @@ packages:
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
-  vite-plugin-geo@0.2.2:
-    resolution: {integrity: sha512-7DTHU24nSiratlMpIE8IMqNc6RKX3MReOEL2zDJOgJl+MVvyKYZ5duSBpUV5e6sHzym0zU+k1mH/+jRo6Ekrdw==}
+  vite-plugin-geo@0.3.0:
+    resolution: {integrity: sha512-OWdB9yZ1HmYNrWCf+ya8Un8MFi8dtRF/3hy68AD2vS5xHgE48zVgievLUgXizDNkoweaFUx8exd/zWwPfpOAYA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -999,6 +999,8 @@ packages:
       vite: ^7.0.0 || ^8.0.0
     peerDependenciesMeta:
       astro:
+        optional: true
+      vite:
         optional: true
 
   vite@8.3.8:
@@ -1945,10 +1947,11 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  vite-plugin-geo@0.2.2(vite@8.3.8(@types/node@24.19.2)):
+  vite-plugin-geo@0.3.0(vite@8.3.8(@types/node@24.19.2)):
     dependencies:
       parse5: 8.0.1
       turndown: 7.2.4
+    optionalDependencies:
       vite: 8.3.8(@types/node@24.19.2)
 
   vite@8.3.8(@types/node@24.19.2):
