@@ -130,7 +130,6 @@ pub async fn pass_change_handler(
 
 // Rank system
 
-
 /// All rank thresholds in one place, lowest to highest.
 /// (rank name, minimum score needed)
 pub const RANK_THRESHOLDS: [(&str, i64); 7] = [
@@ -177,9 +176,7 @@ pub fn rank_for_score(score: i64) -> RankInfo {
     }
 }
 
-
 // GET /api/stats  (read-only)
-
 
 /// One row from players LEFT JOIN playerstats. COALESCE gives zeros and an
 /// empty titles list when the player has no playerstats row yet.
@@ -273,6 +270,9 @@ WHERE p.username = $1
         rank,
     }))
 }
+
+/// to be moved to a testing file (test.rs)
+
 #[cfg(test)]
 mod rank_tests {
     use super::*;

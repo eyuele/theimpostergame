@@ -21,6 +21,8 @@ mod api;
 
 use crate::api::{auth_middleware, dbhandler, game_utils, userauth};
 
+mod test;
+
 #[tokio::main]
 async fn main() {
     dotenv().ok();
@@ -82,12 +84,12 @@ async fn main() {
         .route("/login", post(userauth::login_handler))
         .route("/register", post(userauth::register_handler));
 
-         let protected_layer = Router::new()
+    let protected_layer = Router::new()
         .route("/me", get(userauth::me_handler))
         .route("/logout", post(userauth::logout_handler))
         .route("/pfp_setter", post(game_utils::user_pfp_handler))
         .route("/pass_change", post(game_utils::pass_change_handler))
-        .route("/stats", get(game_utils::stats_handler))   // <- new line
+        .route("/stats", get(game_utils::stats_handler)) // <- new line
         .route_layer(middleware::from_fn(auth_middleware::require_login));
 
     let api = Router::new().merge(public_layer).merge(protected_layer);
