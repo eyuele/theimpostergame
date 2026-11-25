@@ -227,20 +227,25 @@ pub async fn stats_handler(
 
     let row = sqlx::query_as::<_, PlayerStatsRow>(
         "
-        SELECT
-            p.username,
-            p.avatar_url,
-            COALESCE(s.times_imposter, 0)::BIGINT AS times_imposter,
-            COALESCE(s.times_civilian, 0)::BIGINT AS times_civilian,
-            COALESCE(s.wins_as_imposter, 0)::BIGINT AS wins_as_imposter,
-            COALESCE(s.losse_as_imposter, 0)::BIGINT AS loss_as_imposter,
-            COALESCE(s.wins_as_civilian, 0)::BIGINT AS wins_as_civilian,
-           COALESCE(s.losse_as_civilian, 0)::BIGINT AS loss_as_civilian,
-            COALESCE(s.score, 0)::BIGINT AS score,
-            COALESCE(s.titles, ARRAY[]::TEXT[]) AS titles
-        FROM players p
-        LEFT JOIN playerstats s ON s.player_id = p.id
-        WHERE p.username = $1
+    SELECT
+    p.username,
+    p.avatar_url,
+    COALESCE(s.times_imposter, 0)::BIGINT AS times_imposter,
+    COALESCE(s.times_civilian, 0)::BIGINT AS times_civilian,
+    COALESCE(s.wins_as_imposter, 0)::BIGINT AS wins_as_imposter,
+    COALESCE(s.loss_as_imposter, 0)::BIGINT AS loss_as_imposter,
+    COALESCE(s.wins_as_civilian, 0)::BIGINT AS wins_as_civilian,
+    COALESCE(s.loss_as_civilian, 0)::BIGINT AS loss_as_civilian,
+    COALESCE(s.score, 0)::BIGINT AS score,
+    COALESCE(
+        (SELECT array_agg(t.title_id ORDER BY t.earned_at)
+         FROM player_titles t
+         WHERE t.player_id = p.id),
+        ARRAY[]::TEXT[]
+    ) AS titles
+FROM players p
+LEFT JOIN playerstats s ON s.player_id = p.id
+WHERE p.username = $1
         ",
     )
     .bind(&username)
