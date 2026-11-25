@@ -22,7 +22,6 @@ mod api;
 use crate::api::{auth_middleware, dbhandler, game_utils, userauth};
 
 mod test;
-use test::rank_tests;
 
 #[tokio::main]
 async fn main() {
